@@ -18,7 +18,8 @@ enum MessageTypes{
 	CANDIDATE,
 	OFFER,
 	ANSWER,
-	CHECK_IN
+	CHECK_IN,
+	LEAVE_LOBBY
 }
 
 
@@ -56,6 +57,8 @@ func _process(delta):
 			elif data.message_type == MessageTypes.OFFER or data.message_type == MessageTypes.ANSWER or data.message_type == MessageTypes.CANDIDATE:
 				print("\nSource is " + str(data.org_peer) + "\n") #+ " message: " + data.data)
 				send_to_user(data.id, data)
+			elif data.message_type == MessageTypes.LEAVE_LOBBY:
+				print("player " + str(data.id) + " wants to leave lobby: " + str(data.lobby_id))
 			elif data.message_type == MessageTypes.REMOVE_LOBBY:
 				print("\nRecieved request to remove lobby: " + data.lobby_id + "\n")
 				if lobbies.has(data.lobby_id):
